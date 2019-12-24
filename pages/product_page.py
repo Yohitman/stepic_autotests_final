@@ -17,3 +17,9 @@ class product_page(base_page):
         value = self.browser.find_element(*product_page_locators.BASKET_VALUE).text
         price = self.browser.find_element(*product_page_locators.PRICE).text
         assert value == price, "{} != {}, product price isnt equal to basket".format(value, price)
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*product_page_locators.SUCCESS_MESSAGE), "Success message is presented, but shouldnt be"
+
+    def should_not_disappear_message(self):
+        assert not self.is_disappeared(*product_page_locators.SUCCESS_MESSAGE), "Message disappeared, but it shouldnt"

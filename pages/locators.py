@@ -6,3 +6,8 @@ class product_page_locators():
     PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product_main h1")
     PRODUCT_NAME_TO_CHECK = (By.CSS_SELECTOR, ".alert-success .alertinner strong")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success")
+
+class base_page_locators():
+    LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
+    LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inv")
