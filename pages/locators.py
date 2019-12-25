@@ -11,3 +11,8 @@ class product_page_locators():
 class base_page_locators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inv")
+    BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini span a")
+
+class basket_page_locators():
+    BASKET_CONTENT = (By.CSS_SELECTOR, "#basket_formset")
+    MESSAGE_EMPTY_BASKET = (By.CSS_SELECTOR, "#content_inner > p")
