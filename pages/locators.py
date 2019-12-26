@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 
+
 class ProductPageLocators():
     ADD_BUTTON = (By.CSS_SELECTOR, ".btn-add-to-basket")
     BASKET_VALUE = (By.CSS_SELECTOR, ".alertinner p strong")
@@ -13,7 +14,6 @@ class BasePageLocators():
     LOGIN_LINK_INVALID = (By.CSS_SELECTOR, "#login_link_inv")
     BASKET_LINK = (By.CSS_SELECTOR, ".basket-mini span a")
     USER_ICON = (By.CSS_SELECTOR, ".icon-user")
-
 
 class BasketPageLocators():
     BASKET_CONTENT = (By.CSS_SELECTOR, "#basket_formset")
