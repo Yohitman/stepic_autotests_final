@@ -2,21 +2,22 @@ import math
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from .locators import base_page_locators
+from .locators import BasePageLocators
+from .locators import LoginPageLocators
 
 
-class base_page():
+class BasePage():
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
         self.url = url
         self.browser.implicitly_wait(timeout)
 
     def go_to_basket_page(self):
-        link = self.browser.find_element(*base_page_locators.BASKET_LINK)
+        link = self.browser.find_element(*BasePageLocators.BASKET_LINK)
         link.click()
 
     def go_to_login_page(self):
-        link = self.browser.find_element(*base_page_locators.LOGIN_LINK)
+        link = self.browser.find_element(*BasePageLocators.LOGIN_LINK)
         link.click()
 
     def is_disappeared(self, how, what, timeout=4):
@@ -44,7 +45,7 @@ class base_page():
         self.browser.get(self.url)
 
     def should_be_login_link(self):
-        assert self.is_element_present(*base_page_locators.LOGIN_LINK), "Login link is not presented"
+        assert self.is_element_present(*BasePageLocators.LOGIN_LINK), "Login link is not presented"
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
@@ -59,3 +60,22 @@ class base_page():
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
+
+    def should_be_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorized user"
+
+class MainPage(BasePage):
+    pass
+
+class LoginPage(BasePage):
+    def register_new_user(self, email, password):
+        self.email = email
+        self.password = password
+        input_new_login = self.browser.find_element(*LoginPageLocators.NEW_LOGIN_FIELD)
+        input_new_password = self.browser.find_element(*LoginPageLocators.NEW_PASSWORD_FIELD)
+        input_confirm_password = self.browser.find_element(*LoginPageLocators.CONFIRM_NEW_PASSWORD)
+        submit_button = self.browser.find_element(*LoginPageLocators.SUBMIT_REGISTRATION_BUTTON)
+        input_new_login.send_keys(email)
+        input_new_password.send_keys(password)
+        input_confirm_password.send_keys(password)
+        submit_button.click()
